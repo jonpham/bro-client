@@ -1,0 +1,12 @@
+<h1>Create a new Bro</h1>
+<%= form_tag '/bros/create', method: :post do %>
+  <%= label_tag :name , "Bro's Name:" %>
+  <%= text_field_tag :input_name %>
+  <%= label_tag :job , "Job:" %>
+  <%= text_field_tag :input_job %>
+  <%= label_tag :fav_food , "Favorite Food:" %>
+  <%= text_field_tag :input_fav_food %>
+  <%= label_tag :bio , "Bio:" %>
+  <%= text_field_tag :input_bio %>
+<%= submit_tag 'Create new Bro.' %>
+<% end %>

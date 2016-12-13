@@ -1,0 +1,16 @@
+<h1>BroList</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Job</th>
+    <th>Favorite Food</th>
+  </tr>
+  <% @bros.each do |bro| %>
+    <tr>
+      <td><%= link_to bro.name, "/bros/#{bro.id}" %></td>
+      <td><%= bro.job %></td>
+      <td><%= bro.fav_food %></td>
+    </tr>
+  <% end %>
+<table>

@@ -8,9 +8,9 @@
   </tr>
   <% @bros.each do |bro| %>
     <tr>
-      <td><%= link_to bro.name, "/bros/#{bro.id}" %></td>
-      <td><%= bro.job %></td>
-      <td><%= bro.fav_food %></td>
+      <td><%= bro['name'] %></td>
+      <td><%= bro['job'] %></td>
+      <td><%= bro['fav_food'] %></td>
     </tr>
   <% end %>
 <table>

@@ -8,5 +8,10 @@
   <%= text_field_tag :input_fav_food, @bro['info']['fav_food'] %>
   <%= label_tag :bio , "Bio:" %>
   <%= text_area_tag :input_bio, @bro['info']['bio'] %>
-<%= submit_tag 'Edit a Bro.' %>
+  <div>
+    <%= submit_tag 'Edit a Bro.' %>
+    <%= link_to 'Delete dis Bro.', "/bros/#{params[:id]}", method: :delete %>
+    <%= link_to 'Return to Bro List', bros_path %>
+  </div>
+
 <% end %>

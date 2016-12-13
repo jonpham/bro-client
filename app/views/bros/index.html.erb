@@ -1,5 +1,6 @@
 <h1>BroList</h1>
 
+<%= link_to "a New Bro shall b Born", new_bro_path %>
 <table>
   <tr>
     <th>Name</th>
@@ -8,7 +9,7 @@
   </tr>
   <% @bros.each do |bro| %>
     <tr>
-      <td><%= bro['name'] %></td>
+      <td><%= link_to bro['name'], bro_path(bro['id']) %></td>
       <td><%= bro['job'] %></td>
       <td><%= bro['fav_food'] %></td>
     </tr>

@@ -40,4 +40,9 @@ class BrosController < ApplicationController
     )
     redirect_to "/bros/#{response.body['id']}"
   end
+
+  def destroy
+    response = Unirest.delete("http://localhost:3001/api/v2/bros/#{params[:id]}")
+    redirect_to bros_path
+  end
 end

@@ -1,0 +1,2 @@
+class BrosController < ApplicationController
+end

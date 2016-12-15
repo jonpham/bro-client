@@ -1,13 +1,13 @@
 <h1>Edit a Bro</h1>
 <%= form_tag "/bros/#{params[:id]}", method: :patch do %>
   <%= label_tag :name , "Bro's Name:" %>
-  <%= text_field_tag :input_name, @bro['name'] %>
+  <%= text_field_tag :input_name, @bro.name %>
   <%= label_tag :job , "Job:" %>
-  <%= text_field_tag :input_job, @bro['info']['job'] %>
+  <%= text_field_tag :input_job, @bro.job %>
   <%= label_tag :fav_food , "Favorite Food:" %>
-  <%= text_field_tag :input_fav_food, @bro['info']['fav_food'] %>
+  <%= text_field_tag :input_fav_food, @bro.fav_food %>
   <%= label_tag :bio , "Bio:" %>
-  <%= text_area_tag :input_bio, @bro['info']['bio'] %>
+  <%= text_area_tag :input_bio, @bro.bio %>
   <div>
     <%= submit_tag 'Edit a Bro.' %>
     <%= link_to 'Delete dis Bro.', "/bros/#{params[:id]}", method: :delete %>

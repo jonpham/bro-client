@@ -1,28 +1,19 @@
 class BrosController < ApplicationController
 
   def index
-    unirest_data = Unirest.get("#{ENV['API_URL']}/bros.json").body
-    @bros = Array.new
-    unirest_data.each do |data_hash|
-      @bros.push(Bro.new(data_hash))
-    end
+    @bros = Bro.get_all
   end
 
   def show 
-    unirest_data = Unirest.get("#{ENV['API_URL']}/bros/#{params[:id]}.json").body
-    @bro = Bro.new(unirest_data)
+    @bro = Bro.find_by_id(params[:id])
   end
 
   def create
-    response = Unirest.post("#{ENV['API_URL']}/bros/",
-      headers:{"Accept" => "application/json"},
-      parameters:{
-        name: params[:input_name],
+    bro.new({name: params[:input_name],
         bio:params[:input_bio],
         fav_food:params[:input_fav_food],
-        job: params[:input_job]
-      }
-    )
+        job: params[:input_job]})
+    response = bro.post
     redirect_to "/bros/#{response.body['id']}"
   end
 
@@ -30,24 +21,19 @@ class BrosController < ApplicationController
   end
 
   def edit
-    @bro = Unirest.get("#{ENV['API_URL']}/bros/#{params[:id]}.json").body
+    @bro = Bro.find_by_id(params[:id])
   end
 
   def update
-    response = Unirest.patch("#{ENV['API_URL']}/bros/#{params[:id]}",
-      headers:{"Accept" => "application/json"},
-      parameters:{
-        name: params[:input_name],
-        bio:params[:input_bio],
-        fav_food:params[:input_fav_food],
-        job: params[:input_job]
-      }
-    )
+    bro = Bro.find_by_id(params[:id])
+    response = bro.update({name: params[:input_name], bio: params[:input_bio],
+      fav_food: params[:input_fav_food], job: params[:input_job]})
     redirect_to "/bros/#{response.body['id']}"
   end
 
   def destroy
-    response = Unirest.delete("#{ENV['API_URL']}/bros/#{params[:id]}")
+    bro = Bro.find_by_id(params[:id])
+    response = bro.destroy
     redirect_to bros_path
   end
 end

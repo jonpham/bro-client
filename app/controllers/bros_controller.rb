@@ -1,15 +1,20 @@
 class BrosController < ApplicationController
 
   def index
-    @bros = Unirest.get("http://localhost:3001/api/v2/bros.json").body
+    unirest_data = Unirest.get("#{ENV['API_URL']}/bros.json").body
+    @bros = Array.new
+    unirest_data.each do |data_hash|
+      @bros.push(Bro.new(data_hash))
+    end
   end
 
   def show 
-    @bro = Unirest.get("http://localhost:3001/api/v2/bros/#{params[:id]}.json").body
+    unirest_data = Unirest.get("#{ENV['API_URL']}/bros/#{params[:id]}.json").body
+    @bro = Bro.new(unirest_data)
   end
 
   def create
-    response = Unirest.post("http://localhost:3001/api/v2/bros/",
+    response = Unirest.post("#{ENV['API_URL']}/bros/",
       headers:{"Accept" => "application/json"},
       parameters:{
         name: params[:input_name],
@@ -25,11 +30,11 @@ class BrosController < ApplicationController
   end
 
   def edit
-    @bro = Unirest.get("http://localhost:3001/api/v2/bros/#{params[:id]}.json").body
+    @bro = Unirest.get("#{ENV['API_URL']}/bros/#{params[:id]}.json").body
   end
 
   def update
-    response = Unirest.patch("http://localhost:3001/api/v2/bros/#{params[:id]}",
+    response = Unirest.patch("#{ENV['API_URL']}/bros/#{params[:id]}",
       headers:{"Accept" => "application/json"},
       parameters:{
         name: params[:input_name],
@@ -42,7 +47,7 @@ class BrosController < ApplicationController
   end
 
   def destroy
-    response = Unirest.delete("http://localhost:3001/api/v2/bros/#{params[:id]}")
+    response = Unirest.delete("#{ENV['API_URL']}/bros/#{params[:id]}")
     redirect_to bros_path
   end
 end

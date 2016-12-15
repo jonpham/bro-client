@@ -9,9 +9,9 @@
   </tr>
   <% @bros.each do |bro| %>
     <tr>
-      <td><%= link_to bro['name'], bro_path(bro['id']) %></td>
-      <td><%= bro['job'] %></td>
-      <td><%= bro['fav_food'] %></td>
+      <td><%= link_to bro.name, bro_path(bro.id) %></td>
+      <td><%= bro.job %></td>
+      <td><%= bro.fav_food %></td>
     </tr>
   <% end %>
 <table>
